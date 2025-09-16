@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lancer Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-container" id="loading-container">
+            <div class="loading-rectangle" id="loading-rectangle"></div>
+        </div>
+        <div class="cmd-container" id="cmd-container">
+            <div class="cmd-output" id="cmd-output"></div>
+            <div class="cmd-input-line">
+                <span class="cmd-prompt">&gt;</span>
+                <input type="text" id="cmd-input" autocomplete="off" autofocus>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content" id="content">
+        <header>
+            <h1>Lancer Placeholder</h1>
+        </header>
+        <main>
+            <p>Blah blah bleh</p>
+        </main>
+        <footer>
+            <p>&copy; 2023 Lancer Website</p>
+        </footer>
+    </div>
+
+    <script>
+        // JavaScript to handle the loading screen and command interface
+        window.addEventListener('load', function() {
+            const loadingScreen = document.getElementById('loading-screen');
+            const loadingContainer = document.getElementById('loading-container');
+            const loadingRectangle = document.getElementById('loading-rectangle');
+            const cmdContainer = document.getElementById('cmd-container');
+            const cmdOutput = document.getElementById('cmd-output');
+            const cmdInput = document.getElementById('cmd-input');
+            const content = document.getElementById('content');
+            
+            // Hide command interface initially
+            cmdContainer.style.display = 'none';
+            
+            // Random code snippets for the command line effect
+            const codeSnippets = [
+                'Initializing system...',
+                'Loading kernel modules...',
+                'Checking file system integrity...',
+                'Mounting virtual drives...',
+                'Starting network services...',
+                'Establishing secure connection...',
+                'Loading user interface components...',
+                'Initializing memory allocation...',
+                'Verifying system integrity...',
+                'Checking for updates...',
+                'Loading configuration files...',
+                'Initializing graphics subsystem...',
+                'LANCER System DEFINITELY ready.'
+            ];
+            
+            // Wait for the loading animation to complete (3 seconds)
+            setTimeout(function() {
+                // Stop the container movement and glitch animations
+                loadingContainer.style.animation = 'none';
+                loadingRectangle.style.animation = 'none';
+                loadingRectangle.style.width = '100%';
+                
+                // Wait a second before transitioning to command line
+                setTimeout(function() {
+                    // Hide the loading bar
+                    loadingContainer.style.display = 'none';
+                    
+                    // Show the command interface
+                    cmdContainer.style.display = 'block';
+                    
+                    // Add animation class for flickering and expansion
+                    cmdContainer.classList.add('animate-cmd');
+                    
+                    // Display random code snippets with typewriter effect
+                    let lineIndex = 0;
+                    let charIndex = 0;
+                    const typeInterval = setInterval(function() {
+                        if (lineIndex < codeSnippets.length) {
+                            if (charIndex < codeSnippets[lineIndex].length) {
+                                cmdOutput.innerHTML += codeSnippets[lineIndex][charIndex];
+                                charIndex++;
+                            } else {
+                                cmdOutput.innerHTML += '<br>';
+                                lineIndex++;
+                                charIndex = 0;
+                            }
+                        } else {
+                            clearInterval(typeInterval);
+                            // Show command prompt after code snippets are done
+                            cmdInput.style.display = 'inline-block';
+                            cmdInput.focus();
+                        }
+                    }, 10);
+                }, 1000);
+            }, 3000);
+            
+            // Handle command input
+            cmdInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    const command = cmdInput.value.trim().toLowerCase();
+                    cmdOutput.innerHTML += '<br>&gt; ' + command;
+                    cmdInput.value = '';
+                    
+                    // Process command
+                    if (command === 'start') {
+                        cmdOutput.innerHTML += '<br>Launching main interface...';
+                        
+                        // Transition to main content
+                        setTimeout(function() {
+                            loadingScreen.style.opacity = '0';
+                            content.style.display = 'block';
+                            
+                            // Remove the loading screen after fade out
+                            setTimeout(function() {
+                                loadingScreen.style.display = 'none';
+                            }, 1000);
+                        }, 1000);
+                    } else {
+                        cmdOutput.innerHTML += '<br>Unknown command: ' + command + '<br>Try "start" to begin.';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
