@@ -28,7 +28,8 @@ body {
 }
 
 .loading-container {
-    width: 250px;
+    width: 25vw; 
+    max-width: 250px; 
     height: 40px;
     background-color: #222;
     position: relative;
@@ -230,8 +231,10 @@ body {
 
 /* Command Line Interface Styles */
 .cmd-container {
-    width: 700px;
-    height: 400px;
+    width: 80vw; 
+    max-width: 700px;
+    height: 60vh; 
+    max-height: 400px;
     background-color: #000;
     color: #a01c2c;
     font-family: 'Courier New', monospace;
